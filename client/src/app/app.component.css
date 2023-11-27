@@ -1,0 +1,24 @@
+body {
+    text-align: center;
+    width: 75%;
+    margin: auto;
+    padding: auto;
+}
+.Main {
+    
+    text-align: center;
+    min-height: 600px;
+    background-color: green;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+}
+
+.Selection {
+    padding: 2em;
+}
+
+img {
+    height:400px;
+    width:300px;
+}
