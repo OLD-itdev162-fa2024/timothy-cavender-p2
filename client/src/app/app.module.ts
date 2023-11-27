@@ -1,12 +1,18 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
+import { FridgeComponent } from './fridge/fridge.component';
+import { HomeComponent } from './home/home.component';
+import { RecipesComponent } from './recipes/recipes.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FridgeComponent,
+    HomeComponent,
+    RecipesComponent
   ],
   imports: [
     BrowserModule,
