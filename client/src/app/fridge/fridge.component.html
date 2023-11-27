@@ -1,2 +1,11 @@
-<h1>Woot!</h1>
-<p>fridge works!</p>
+<!--Displays my active ingredients-->
+<h1>Ingredients</h1>
+<div *ngFor="let ing of ingredients">
+    <h2>{{ing.name}}</h2>
+    <div *ngFor="let item of ing.value">
+        <p>{{item.name}}: {{item.value}}</p>
+    </div>
+</div>
+
+<!--Buttons and text box to add ingredients-->
+<!--Buttons and drop down box to remove ingredients-->
