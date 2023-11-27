@@ -7,5 +7,31 @@
     </div>
 </div>
 
-<!--Buttons and text box to add ingredients-->
-<!--Buttons and drop down box to remove ingredients-->
+
+
+<div>
+    <!--Buttons and text box to add ingredients-->
+    <div class="Add-Remove-Items" >
+        <div class="Add-Items">
+            <h2>Item Name</h2>
+            <h2>Number of Items</h2>
+        </div>
+        <div class="Add-Items">
+            <input type="text">
+            <input type="text">
+        </div>
+        
+        <button type="submit">Add</button>
+    </div>
+    <!--Buttons and drop down box to remove ingredients-->
+    <div class="Add-Remove-Items">
+        <h2>Item To Remove</h2>
+        <select>
+            <optgroup *ngFor="let ingredient of ingredients" label="{{ingredient.name}}">
+                <option *ngFor="let item of ingredient.value">{{item.name}}</option>
+            </optgroup>
+        </select>
+        <input type="text">
+        <button type="submit">Remove</button>
+    </div>
+</div>
