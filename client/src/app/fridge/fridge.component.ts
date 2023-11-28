@@ -7,17 +7,31 @@ import { Component, OnInit } from '@angular/core';
 
 
 export class FridgeComponent implements OnInit {
+  selectedOption: string;
+  options = [
+    {name:'Chose Action', value: 'none'},
+    { name: 'Add', value: 'add' },
+    { name: 'Remove', value: 'remove' }
+  ];
 
   /*Import this from database.  */
   ingredients: any = [
     {name: "Dairy", value: [
-      {name: "Milk", value: 5},
-      {name: "Cheese", value: 3}
+        {name: "Milk", value: 5},
+        {name: "Cheese", value: 3}
       ]
     },
     {name: "Produce", value: [
-      {name: "Tomatoe", value: 5},
-      {name: "Brocoli", value: 6}    
+        {name: "Tomato", value: 5},
+        {name: "Brocoli", value: 6}    
+      ]
+    },
+    {name: "Meat", value: [
+
+      ]
+    },
+    {name: "Bread", value: [
+
       ]
     }
     
@@ -31,5 +45,8 @@ export class FridgeComponent implements OnInit {
 
     //Will also need to add/remove ingredients
   }
+  onSelect(option: string) {
+    this.selectedOption = option;
+  } 
 
 }

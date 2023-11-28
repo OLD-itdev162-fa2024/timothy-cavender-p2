@@ -1,37 +1,64 @@
-<!--Displays my active ingredients-->
-<h1>Ingredients</h1>
-<div *ngFor="let ing of ingredients">
-    <h2>{{ing.name}}</h2>
-    <div *ngFor="let item of ing.value">
-        <p>{{item.name}}: {{item.value}}</p>
-    </div>
-</div>
-
-
-
-<div>
-    <!--Buttons and text box to add ingredients-->
-    <div class="Add-Remove-Items" >
-        <div class="Add-Items">
-            <h2>Item Name</h2>
-            <h2>Number of Items</h2>
+<div class="main">
+    <!--Displays my active ingredients-->
+    <h1>Ingredients</h1>
+    <div class="grid-container">
+        <div *ngFor="let ing of ingredients" class="grid-item">
+            <h2>{{ing.name}}</h2>
+            <div *ngFor="let item of ing.value">
+                <p>{{item.name}}: {{item.value}}</p>
+            </div>
         </div>
-        <div class="Add-Items">
-            <input type="text">
-            <input type="text">
-        </div>
-        
-        <button type="submit">Add</button>
     </div>
-    <!--Buttons and drop down box to remove ingredients-->
-    <div class="Add-Remove-Items">
-        <h2>Item To Remove</h2>
-        <select>
-            <optgroup *ngFor="let ingredient of ingredients" label="{{ingredient.name}}">
-                <option *ngFor="let item of ingredient.value">{{item.name}}</option>
-            </optgroup>
+
+
+        <select (change)="onSelect($event.target.value)">
+            <option *ngFor="let option of options" [value]="option.value">{{option.name}}</option>
         </select>
-        <input type="text">
-        <button type="submit">Remove</button>
+
+        <div class="Add-Items" *ngIf="selectedOption === 'add'">
+            <h1>Add Items To Your Refrigerator</h1>
+            <!--Buttons and text box to add ingredients-->
+            <div class="Add-Container">
+                <div>
+                    <h3>Item Name</h3>
+                    <input type="text">
+                </div>
+                <div>
+                    <h3>Quantity</h3>
+                    <input type="text">
+                </div>
+            </div>
+            <button type="submit" id="Add-Button">Add Item To Fridge</button>
+        </div>
+
+        <div class="Remove-Items" *ngIf="selectedOption === 'remove'">
+            <h1 class="remove">Remove Items from your Refrigerator</h1>
+            <div class="Remove-Container" class="remove">
+                <h3>Item To Remove</h3>
+                <select class="Add-Remove-Items">
+                    <optgroup *ngFor="let ingredient of ingredients" label="{{ingredient.name}}">
+                        <option *ngFor="let item of ingredient.value">{{item.name}}</option>
+                    </optgroup>
+                </select>
+                <input type="text">
+            </div>
+            <button type="submit" class="remove">Remove</button>
+        </div>
+
+    <!--<div class="Add-Remove-Items">
+        
+
+        <div class="add">
+        <h1 class="remove">Remove Items from your Refrigerator</h1>
+        <div class="Remove-Container" class="remove">
+            <h3>Item To Remove</h3>
+            <select class="Add-Remove-Items">
+                <optgroup *ngFor="let ingredient of ingredients" label="{{ingredient.name}}">
+                    <option *ngFor="let item of ingredient.value">{{item.name}}</option>
+                </optgroup>
+            </select>
+            <input type="text">            
+        </div>
+        <button type="submit" class="remove">Remove</button>
     </div>
-</div>
+</div>-->

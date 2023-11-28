@@ -1,4 +1,46 @@
-.Add-Items{
+.main {
+    background-color: green;
+    width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    /* This creates two columns */
+    gap: 10px;
+    /* This is the gap between the grid items */
+}
+.grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    font-size: 30px;
+    text-align: center;
+    width: 250px;
+}
+.Add-Items {
+    text-align: center;
+    margin-right: 10px;
+}
+.Add-Container {
+
+}
+.Add-Container div {
+    display: flex;
+    justify-content: center;
+}
+.Add-Remove-Items{
+    text-align: center;
+    margin-right: 10px;
+}
+button {
+    display: block;
+    margin:auto;
+    padding: auto;
+
 }
