@@ -23,20 +23,25 @@
     text-align: center;
     width: 250px;
 }
-.Add-Items {
+.Selection {
+    margin: auto;
+    padding: auto;
+    text-align: center;
+}
+.Add-Items-Container {
     text-align: center;
     margin-right: 10px;
 }
 .Add-Container {
-
-}
-.Add-Container div {
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding-bottom: 2em;
+
 }
 .Add-Remove-Items{
     text-align: center;
-    margin-right: 10px;
+    margin-right: 2em;
 }
 button {
     display: block;

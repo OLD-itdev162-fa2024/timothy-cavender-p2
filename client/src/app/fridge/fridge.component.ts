@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 
 
 export class FridgeComponent implements OnInit {
+  //Used For Drop Down Menu
   selectedOption: string;
   options = [
     {name:'Chose Action', value: 'none'},

@@ -10,12 +10,14 @@
         </div>
     </div>
 
-
+    <div class="Selection">
+        <h2>Select To Add/Remove Items From The Fridge</h2>
         <select (change)="onSelect($event.target.value)">
             <option *ngFor="let option of options" [value]="option.value">{{option.name}}</option>
         </select>
+    </div>
 
-        <div class="Add-Items" *ngIf="selectedOption === 'add'">
+        <div class="Add-Items-Container" *ngIf="selectedOption === 'add'">
             <h1>Add Items To Your Refrigerator</h1>
             <!--Buttons and text box to add ingredients-->
             <div class="Add-Container">
