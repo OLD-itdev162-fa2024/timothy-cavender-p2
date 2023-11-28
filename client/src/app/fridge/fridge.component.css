@@ -32,7 +32,7 @@
     text-align: center;
     margin-right: 10px;
 }
-.Add-Container {
+.Add-Remove-Container {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;

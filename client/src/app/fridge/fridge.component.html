@@ -20,7 +20,7 @@
         <div class="Add-Items-Container" *ngIf="selectedOption === 'add'">
             <h1>Add Items To Your Refrigerator</h1>
             <!--Buttons and text box to add ingredients-->
-            <div class="Add-Container">
+            <div class="Add-Remove-Container">
                 <div>
                     <h3>Item Name</h3>
                     <input type="text">
@@ -33,18 +33,24 @@
             <button type="submit" id="Add-Button">Add Item To Fridge</button>
         </div>
 
-        <div class="Remove-Items" *ngIf="selectedOption === 'remove'">
-            <h1 class="remove">Remove Items from your Refrigerator</h1>
-            <div class="Remove-Container" class="remove">
-                <h3>Item To Remove</h3>
-                <select class="Add-Remove-Items">
-                    <optgroup *ngFor="let ingredient of ingredients" label="{{ingredient.name}}">
-                        <option *ngFor="let item of ingredient.value">{{item.name}}</option>
-                    </optgroup>
-                </select>
-                <input type="text">
+        <div class="Remove-Items-Container" *ngIf="selectedOption === 'remove'">            
+            <h1>Remove Items from your Refrigerator</h1>
+            <div class="Add-Remove-Container">
+                <div>
+                    <h3>Item To Remove</h3>
+                    <select class="Add-Remove-Items">
+                        <optgroup *ngFor="let ingredient of ingredients" label="{{ingredient.name}}">
+                            <option *ngFor="let item of ingredient.value">{{item.name}}</option>
+                        </optgroup>
+                    </select>                    
+                </div>
+                <div>
+                    <h3>Quantity</h3>
+                    <input type="text">
+                </div>
             </div>
-            <button type="submit" class="remove">Remove</button>
+                <button type="submit">Remove Item From Fridge</button>
+            </div>            
         </div>
 
     <!--<div class="Add-Remove-Items">
