@@ -7,10 +7,8 @@
 -->
 
 <h1>{{title}}</h1>
-
-<ul>
-  <li *ngFor="let n of ingredients">{{n}}</li>
-</ul>
-<!--<ul>
-  <li *ngFor="let w of weatherForecasts">{{w.summary}}</li>
-</ul>-->
+<div *ngFor="let i of ingredients">
+  <h2>{{i.type}}</h2>
+  <p>{{i.name}}</p>
+  <p>{{i.quantity}}</p>
+</div>
