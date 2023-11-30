@@ -1,4 +1,13 @@
 <!--Menu Bar Here-->
+<!--
+  Working Code, after testing is complete
 <div>
   <router-outlet></router-outlet>
 </div>
+-->
+
+<h1>{{title}}</h1>
+
+<ul>
+  <li *ngFor="let w of weatherForecasts">{{w.summary}}</li>
+</ul>
