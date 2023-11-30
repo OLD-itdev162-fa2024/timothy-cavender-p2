@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,4 +31,21 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+//Seed Data
+using(var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    try
+    {
+        var context = services.GetRequiredService<DataContext>();
+        context.Database.Migrate();
+        Seed.SeedIngredientData(context);
+    }
+    catch(Exception e)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(e,"An error occurred while seeding the database");
+    }
+}
 app.Run();
