@@ -9,28 +9,21 @@ using Persistence;
 namespace API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class IngredientsController : ControllerBase
     {
-        private static readonly string[] IngredientNames = new[]
-        {
-            "Milk","Cheese","Apple","Steak"
-        };
-
-        private readonly ILogger<IngredientsController> _logger;
 
         private readonly DataContext _context;
 
         public IngredientsController(ILogger<IngredientsController> logger, DataContext context)
         {
-            _logger = logger;
             _context = context;
         }
 
         [HttpGet(Name = "GetIngredients")]
-        public string[] Get()
+        public ActionResult<List<Ingredients>> Get()
         {
-            return IngredientNames;
+            return _context.Ingredient.ToList();
         }
     }
 }
