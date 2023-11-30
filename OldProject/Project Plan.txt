@@ -1,8 +1,0 @@
-Project will include:
-- .NetCore background
-- EntityFramework with database
-- Endpoint to display data in the database
-	- I will pre-populate some data
-
-
-This app will be a mini "cook book". The data stored will be different recipes, which will include the dish name, ingrediants, and cook time. If I can get to making an angular front end, I would like to be able to choose the dish based on a drop down. 
