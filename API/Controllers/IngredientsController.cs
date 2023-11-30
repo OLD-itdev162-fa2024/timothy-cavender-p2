@@ -16,6 +16,7 @@ namespace API.Controllers
         {
             _context = context;
         }
+
         /// <summary>
         /// GET api/get 
         /// </summary>
@@ -45,7 +46,45 @@ namespace API.Controllers
             }
 
             throw new Exception("Error adding ingredient");
+        }
 
+        ///<summary>
+        /// PUT api/post
+        ///</summary
+        ///<param>JSON Field with values to update</param>
+        ///<returns>An updated Ingredient</returns>
+
+        [HttpPut(Name = "Update")]
+        public ActionResult<Ingredients> Update([FromBody]Ingredients request, string change)
+        {
+            var ing = _context.Ingredient.Find(request.Name);
+
+            if(ing == null)
+            {
+                throw new Exception("Could not find chosen Ingredient");
+            }
+
+            int quantity = 0;
+            if(change == "add")
+                quantity = ing.Quantity + request.Quantity;
+            else
+            {
+                quantity = ing.Quantity - request.Quantity;
+                if (quantity < 0)
+                    throw new Exception($"Requested amount must be smaller than the current amount of {ing.Quantity}");              
+            }
+
+            //Update the selected Ingredient Quantity
+            ing.Quantity = quantity;
+
+            var success = _context.SaveChanges() > 0;
+
+            if(success)
+            {
+                return Ok(ing);
+            }
+
+            throw new Exception("Error Updating Ingredient");
         }
     }
 }
