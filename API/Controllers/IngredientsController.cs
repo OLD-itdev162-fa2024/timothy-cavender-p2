@@ -57,7 +57,8 @@ namespace API.Controllers
         [HttpPut(Name = "Update")]
         public ActionResult<Ingredients> Update([FromBody]Ingredients request, string change)
         {
-            var ing = _context.Ingredient.Find(request.Name);
+            //var ing = _context.Ingredient.Find(request.Id);
+            var ing = _context.Ingredient.FirstOrDefault(i => i.Name == request.Name);
 
             if(ing == null)
             {
@@ -83,7 +84,7 @@ namespace API.Controllers
             {
                 return Ok(ing);
             }
-
+            
             throw new Exception("Error Updating Ingredient");
         }
     }
