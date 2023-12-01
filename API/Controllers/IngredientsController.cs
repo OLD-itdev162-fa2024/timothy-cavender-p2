@@ -109,7 +109,8 @@ namespace API.Controllers
 
             if(success)
             {
-                return Ok(ing);
+                string message = $"Id: {ing.Id}\nName:{ing.Name} was successfully removed";
+                return Ok(message);
             }
             throw new Exception("Failed to delete requested Ingredient");
         }
