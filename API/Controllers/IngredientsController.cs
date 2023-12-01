@@ -2,6 +2,7 @@ using Domain;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Persistence;
+using SQLitePCL;
 
 namespace API.Controllers
 {
@@ -27,7 +28,7 @@ namespace API.Controllers
             return _context.Ingredient.ToList();
         }
 
-        [HttpPost(Name = "Create")]
+        [HttpPost(Name = "AddIngredient")]
         public ActionResult<Ingredients> Create([FromBody]Ingredients request)
         {
             var ingredient = new Ingredients 
@@ -54,7 +55,7 @@ namespace API.Controllers
         ///<param>JSON Field with values to update</param>
         ///<returns>An updated Ingredient</returns>
 
-        [HttpPut(Name = "Update")]
+        [HttpPut(Name = "UpdateIngredient")]
         public ActionResult<Ingredients> Update([FromBody]Ingredients request, string change)
         {
             //var ing = _context.Ingredient.Find(request.Id);
@@ -86,6 +87,31 @@ namespace API.Controllers
             }
             
             throw new Exception("Error Updating Ingredient");
+        }
+    
+        /// <summary>
+        /// DELETE api/delete
+        /// Will delete the requested item from the database
+        /// based on Id match
+        /// </summary>
+        [HttpDelete(Name = "Delete Ingredient")]
+        public ActionResult<Ingredients> Delete([FromBody]Ingredients request)
+        {
+            var ing = _context.Ingredient.Find(request.Id);
+
+            if(ing == null)
+            {
+                throw new Exception("Requested Ingredient was not found.");
+            }
+
+            _context.Ingredient.Remove(ing);
+            var success = _context.SaveChanges() > 0;
+
+            if(success)
+            {
+                return Ok(ing);
+            }
+            throw new Exception("Failed to delete requested Ingredient");
         }
     }
 }
