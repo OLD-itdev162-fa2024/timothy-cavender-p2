@@ -1,8 +1,6 @@
 using Domain;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Persistence;
-using SQLitePCL;
 
 namespace API.Controllers
 {
@@ -25,26 +23,35 @@ namespace API.Controllers
         [HttpGet(Name = "GetIngredients")]
         public ActionResult<List<Ingredients>> Get()
         {
-            return _context.Ingredient.ToList();
+            return _context.Ingredient.OrderBy(i => i.Type).ToList();
         }
 
         [HttpPost(Name = "AddIngredient")]
         public ActionResult<Ingredients> Create([FromBody]Ingredients request)
-        {
+        {            
             var ingredient = new Ingredients 
             {
                 Type = request.Type,
                 Name = request.Name,
                 Quantity = request.Quantity
             };
+            var ing = _context.Ingredient.FirstOrDefault(i => i.Name == ingredient.Name);
 
-            _context.Ingredient.Add(ingredient);
-            var success = _context.SaveChanges() > 0;
-
-            if(success)
+            if (ing == null)
             {
-                return Ok(ingredient);
+                _context.Ingredient.Add(ingredient);
+                var success = _context.SaveChanges() > 0;
+
+                if (success)
+                {
+                    return Ok(ingredient);
+                }
             }
+            else
+            {
+                throw new Exception("Ingredient already exists");
+            }
+            
 
             throw new Exception("Error adding ingredient");
         }
