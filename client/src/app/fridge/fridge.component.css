@@ -1,5 +1,13 @@
+h1,h3 {
+    color: white;
+}
+
 .main {
-    background-color: green;
+    background-color: #000000;
+    background-image:
+        linear-gradient(0deg, transparent 1.5px, #323232 1.5px, #323232 3px, transparent 3px),
+        linear-gradient(90deg, transparent 1.5px, #323232 1.5px, #323232 3px, transparent 3px);
+    background-size: 100px 100px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -23,14 +31,24 @@
     text-align: center;
     width: 250px;
 }
+.grid-item h2 {
+    font-size: 1em;
+}
+.grid-item p {
+    font-size: .75em;
+}
 .Selection {
     margin: auto;
     padding: auto;
     text-align: center;
 }
+.Selection h2 {
+    color: white;
+}
 .Add-Items-Container {
     text-align: center;
     margin-right: 10px;
+    color: white;
 }
 .Add-Remove-Container {
     display: flex;
@@ -42,6 +60,10 @@
 .Add-Remove-Items{
     text-align: center;
     margin-right: 2em;
+    color: white;
+}
+.Remove-Items-Container {
+    color: white;
 }
 button {
     display: block;
