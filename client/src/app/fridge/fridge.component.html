@@ -1,6 +1,6 @@
 <div class="main">
     <!--Displays my active ingredients-->
-    <h1>Ingredients</h1>
+    <h1>Ingredients In Fridge</h1>
     <div class="grid-container">
         <div *ngFor="let t of types" class="grid-item">
             <h2>{{t}}</h2>
@@ -18,7 +18,7 @@
     </div>
 
     <div class="Add-Items-Container" *ngIf="selectedOption === 'add'">
-        <h1>Add Items To Your Refrigerator</h1>
+        <h2>Add Items To Your Refrigerator</h2>
         <!--Buttons and text box to add ingredients-->
         <div class="Add-Remove-Container">
             <div>
@@ -40,7 +40,7 @@
     </div>
 
     <div class="Remove-Items-Container" *ngIf="selectedOption === 'remove'">            
-        <h1>Remove Items from your Refrigerator</h1>
+        <h2>Remove Items from your Refrigerator</h2>
         <div class="Add-Remove-Container">
             <div>
                 <h3>Item To Remove</h3>
