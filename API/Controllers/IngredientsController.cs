@@ -28,17 +28,19 @@ namespace API.Controllers
 
         [HttpPost(Name = "AddIngredient")]
         public ActionResult<Ingredients> Create([FromBody]Ingredients request)
-        {            
-            var ingredient = new Ingredients 
-            {
-                Type = request.Type,
-                Name = request.Name,
-                Quantity = request.Quantity
-            };
-            var ing = _context.Ingredient.FirstOrDefault(i => i.Name == ingredient.Name);
+        {
+            var ing = _context.Ingredient.FirstOrDefault(i => i.Name == request.Name);
 
-            if (ing == null)
+            //Add New Ingredient
+            if(ing == null)
             {
+                var ingredient = new Ingredients
+                {
+                    Type = request.Type,
+                    Name = request.Name,
+                    Quantity = request.Quantity
+                };
+
                 _context.Ingredient.Add(ingredient);
                 var success = _context.SaveChanges() > 0;
 
@@ -46,80 +48,62 @@ namespace API.Controllers
                 {
                     return Ok(ingredient);
                 }
+                throw new Exception("Error adding ingredient");
             }
-            else
+            //Update Existing Record
             {
-                throw new Exception("Ingredient already exists");
-            }
-            
+                ing.Quantity = request.Quantity + ing.Quantity;
 
-            throw new Exception("Error adding ingredient");
+                var success = _context.SaveChanges() > 0;
+
+                if (success)
+                {
+                    return Ok(ing);
+                }
+                throw new Exception("Error Updating Ingredient");
+            }            
         }
 
-        ///<summary>
-        /// PUT api/post
-        ///</summary
-        ///<param>JSON Field with values to update</param>
-        ///<returns>An updated Ingredient</returns>
-
-        [HttpPut(Name = "UpdateIngredient")]
-        public ActionResult<Ingredients> Update([FromBody]Ingredients request, string change)
-        {
-            //var ing = _context.Ingredient.Find(request.Id);
-            var ing = _context.Ingredient.FirstOrDefault(i => i.Name == request.Name);
-
-            if(ing == null)
-            {
-                throw new Exception("Could not find chosen Ingredient");
-            }
-
-            int quantity = 0;
-            if(change == "add")
-                quantity = ing.Quantity + request.Quantity;
-            else
-            {
-                quantity = ing.Quantity - request.Quantity;
-                if (quantity < 0)
-                    throw new Exception($"Requested amount must be smaller than the current amount of {ing.Quantity}");              
-            }
-
-            //Update the selected Ingredient Quantity
-            ing.Quantity = quantity;
-
-            var success = _context.SaveChanges() > 0;
-
-            if(success)
-            {
-                return Ok(ing);
-            }
-            
-            throw new Exception("Error Updating Ingredient");
-        }
-    
+        
         /// <summary>
         /// DELETE api/delete
         /// Will delete the requested item from the database
         /// based on Id match
         /// </summary>
-        [HttpDelete(Name = "Delete Ingredient")]
-        public ActionResult<Ingredients> Delete([FromBody]Ingredients request)
-        {
-            var ing = _context.Ingredient.Find(request.Id);
+        [HttpDelete("{name}/{quantity}", Name = "DeleteIngredient")]
+        public ActionResult<Ingredients> Delete(string name, int quantity)
+        {           
+            string message = "";
+            var ing = _context.Ingredient.FirstOrDefault(i => i.Name == name);
 
             if(ing == null)
             {
                 throw new Exception("Requested Ingredient was not found.");
             }
 
-            _context.Ingredient.Remove(ing);
-            var success = _context.SaveChanges() > 0;
-
-            if(success)
+            //If the change in quantity is < 1 delete the entry
+            int qty = ing.Quantity - quantity;
+            if(qty <= 0)
             {
-                string message = $"Id: {ing.Id}\nName:{ing.Name} was successfully removed";
+                _context.Ingredient.Remove(ing);
+                message = $"Id: {ing.Id}\nName: {ing.Name} was successfully removed";
+            }
+            //Update the quantity
+            else
+            {
+                ing.Quantity = qty;
+                message = $"Updated quantity for {ing.Name}";
+
+            }
+            //Save changes
+            var success = _context.SaveChanges() > 0;
+            if (success)
+            {                
                 return Ok(message);
             }
+
             throw new Exception("Failed to delete requested Ingredient");
+            
         }
     }
 }

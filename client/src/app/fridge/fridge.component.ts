@@ -7,20 +7,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./fridge.component.css']
 })
 
-
 export class FridgeComponent implements OnInit {
   NewIngredient: any = {};
-  addName: String;
-  addType: String;
-  addQty: Number;
+  DelIngredient: any = {};
 
   //Used For Drop Down Menu
   selectedOption: string;
   options = [
     {name:'Chose Action', value: 'none'},
     { name: 'Add', value: 'add' },
-    { name: 'Remove', value: 'remove' },
-    { name: 'Update', value: 'update'}
+    { name: 'Remove', value: 'remove' }
   ];  
 
   types = ["Dairy","Produce","Meat","Bread","Frozen"]; 
@@ -46,48 +42,21 @@ export class FridgeComponent implements OnInit {
   onSelect(option: string) {
     this.selectedOption = option;
   } 
-
-  ButtonClick(change: string, name: string, qty: number)
-  {
-    var ingredient = null;
-
-    for(let ing of this.ingredients)
-    {
-      if(ing.Name == name)
-      {
-        ingredient = ing;
-        break;
-      }
-    }
-    if(ingredient == null && change == "add")
-    {
-      //Add New ingredient
-    }
-    else if(ingredient != null)
-    {
-      //Update
-    }
-    else
-    {
-      //Error
-    }
-  }
-
+  
   AddIngredient()
   {
     this.http.post('http://localhost:5068/api/ingredients', this.NewIngredient).subscribe(
-      response => (this.home()),
-        error => { console.log(error); }
-    )    
-
+        response => (this.home()),
+          error => { console.log(error); }
+      )
   }
-  UpdateIngredient()
-  {
 
-  }
   DeleteIngredient()
-  {
-
+  {  
+    this.http.delete(`http://localhost:5068/api/ingredients/${this.DelIngredient.Name}/${this.DelIngredient.Quantity}`,{responseType: 'text'}).subscribe(
+    response => this.home(),    
+    error => { console.log(error); }
+    )
   }
 
   home()

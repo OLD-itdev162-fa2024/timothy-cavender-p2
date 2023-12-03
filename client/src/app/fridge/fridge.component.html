@@ -44,17 +44,15 @@
         <div class="Add-Remove-Container">
             <div>
                 <h3>Item To Remove</h3>
-                <select class="Add-Remove-Items">
-                    <optgroup *ngFor="let ingredient of ingredients" label="{{ingredient.name}}">
-                        <option *ngFor="let item of ingredient.value">{{item.name}}</option>
-                    </optgroup>
+                <select class="Add-Remove-Items" [(ngModel)]="DelIngredient.Name">
+                    <option *ngFor="let ing of ingredients">{{ing.name}}</option>
                 </select>                    
             </div>
             <div>
                 <h3>Quantity</h3>
-                <input type="text">
+                <input type="number" [(ngModel)]="DelIngredient.Quantity">
             </div>
         </div>
-            <button type="submit">Remove Item From Fridge</button>
+            <button type="submit" (click)="DeleteIngredient()">Remove Item From Fridge</button>
         </div>            
     </div>
