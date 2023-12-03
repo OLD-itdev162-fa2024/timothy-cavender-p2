@@ -1,0 +1,16 @@
+This project is going to emulate a smart fridge. Here the the functions I want to achieve:
+Angular Front End
+Entity Framework Back End
+EF database
+
+--Will Complete
+    -Opening Page That chooses Fridge or Recipe Book
+    -Fridge will do the following:
+        -Display Ingredients in the fridge (Get API)
+        -Add/Update Item Quantities in the fridge (Post API)
+        -Remove/Update Item Quantities in the fridge (Delete API)
+
+--Optional
+    -Recipe Page that will show recipes that can be made, based on the item sin teh fridge
+    ***I ran out of time for this page, so it loads some recipes based on a List defaulted
+    in the Component page. If I had time, recipes would have been loaded in from the database
