@@ -1,2 +1,58 @@
-<h1>Woot!</h1>
-<p>fridge works!</p>
+<div class="main">
+    <!--Displays my active ingredients-->
+    <h1>Ingredients</h1>
+    <div class="grid-container">
+        <div *ngFor="let t of types" class="grid-item">
+            <h2>{{t}}</h2>
+            <div *ngFor="let ing of ingredients">
+                <p *ngIf="t == ing.type">{{ing.name}}: {{ing.quantity}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="Selection">
+        <h2>Select To Add/Remove Items From The Fridge</h2>
+        <select (change)="onSelect($event.target.value)">
+            <option *ngFor="let option of options" [value]="option.value">{{option.name}}</option>
+        </select>
+    </div>
+
+    <div class="Add-Items-Container" *ngIf="selectedOption === 'add'">
+        <h1>Add Items To Your Refrigerator</h1>
+        <!--Buttons and text box to add ingredients-->
+        <div class="Add-Remove-Container">
+            <div>
+                <h3>Type</h3>
+                <select [(ngModel)]="NewIngredient.Type">
+                    <option *ngFor="let t of types">{{t}}</option>
+                </select>
+            </div>
+            <div>
+                <h3>Item Name</h3>
+                <input [(ngModel)]="NewIngredient.Name" type="text">
+            </div>
+            <div>
+                <h3>Quantity</h3>
+                <input [(ngModel)]="NewIngredient.Quantity" type="number">
+            </div>
+        </div>
+        <button type="submit" id="Add-Button" (click)="AddIngredient()">Add Item To Fridge</button>
+    </div>
+
+    <div class="Remove-Items-Container" *ngIf="selectedOption === 'remove'">            
+        <h1>Remove Items from your Refrigerator</h1>
+        <div class="Add-Remove-Container">
+            <div>
+                <h3>Item To Remove</h3>
+                <select class="Add-Remove-Items" [(ngModel)]="DelIngredient.Name">
+                    <option *ngFor="let ing of ingredients">{{ing.name}}</option>
+                </select>                    
+            </div>
+            <div>
+                <h3>Quantity</h3>
+                <input type="number" [(ngModel)]="DelIngredient.Quantity">
+            </div>
+        </div>
+            <button type="submit" (click)="DeleteIngredient()">Remove Item From Fridge</button>
+        </div>            
+    </div>
