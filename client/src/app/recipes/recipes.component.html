@@ -1,1 +1,14 @@
-<p>recipes works!</p>
+<div class="main">
+    <h1>Recipe Book</h1>
+    <div class="grid-container">
+        <div *ngFor="let r of recipes" class="grid-item">
+            <h2>{{r.Name}}</h2>
+            <h3>Ingredients</h3>
+            <div *ngFor="let ing of r.Ingredients">            
+                <p>{{ing.name}}: {{ing.value}}</p>
+            </div>
+            <h2>Instructions</h2>
+            <h3>{{r.Instructions}}</h3>
+        </div>
+    </div>
+</div>

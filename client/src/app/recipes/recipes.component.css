@@ -1,0 +1,30 @@
+h1{color: white}
+.main {
+    background-color: #000000;
+    background-image:
+        linear-gradient(0deg, transparent 1.5px, #323232 1.5px, #323232 3px, transparent 3px),
+        linear-gradient(90deg, transparent 1.5px, #323232 1.5px, #323232 3px, transparent 3px);
+    background-size: 100px 100px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    /* This creates two columns */
+    gap: 10px;
+    /* This is the gap between the grid items */
+}
+.grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    font-size: 30px;
+    text-align: center;
+    width: 250px;
+}
